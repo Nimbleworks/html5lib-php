@@ -3157,7 +3157,12 @@ class HTML5_TreeBuilder {
         }
 
     private function insertElement($token, $append = true) {
-        $el = $this->dom->createElementNS(self::NS_HTML, $token['name']);
+        //TODO: This is a hack. 
+        try{
+            $el = $this->dom->createElementNS(self::NS_HTML, $token['name']);
+        }catch (Exception $e){
+            return;
+        }
 
         if (!empty($token['attr'])) {
             foreach($token['attr'] as $attr) {
